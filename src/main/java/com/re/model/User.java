@@ -1,5 +1,8 @@
 package com.re.model;
 
+import java.io.Serializable;
+import java.util.Objects;
+
 /**
  * @author RE
  * @version 1.0.0
@@ -13,7 +16,8 @@ package com.re.model;
  * @updateRemark
  * @since 1.8
  */
-public class User {
+public class User implements Serializable {
+    private static final long serialVersionUID = -1437150297986737360L;
     /**
      * 用户id
      */
@@ -117,5 +121,26 @@ public class User {
                 ", password=" + password +
                 ", userStatus=" + userStatus +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        User user = (User) o;
+        return userId == user.userId &&
+                userStatusNumber == user.userStatusNumber &&
+                Objects.equals(userName, user.userName) &&
+                Objects.equals(password, user.password) &&
+                userStatus == user.userStatus;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(userId, userName, password, userStatus, userStatusNumber);
     }
 }
